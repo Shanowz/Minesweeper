@@ -20,6 +20,18 @@ h1{
 
 main{
     min-height: 800px;
+    background-image: url("explosion.jpg");
+    background-position: -800px 0px;
+}
+
+#popup{
+    position:absolute;
+    top: 200px;
+    width:60%;
+    left: 20%;
+    border: 1px black solid;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 #titre_popup{
