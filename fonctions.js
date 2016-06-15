@@ -72,8 +72,9 @@ function CreerTableGraphique(tableau, donMode)
 {
     var table = document.getElementById("maTable");
 
-    var i, j;
+    var i, j, k;
 
+    k=0;
     i=0;
     while(i<donMode.nbLin)
     {
@@ -82,8 +83,11 @@ function CreerTableGraphique(tableau, donMode)
         while(j<donMode.nbCol)
         {
             var td = document.createElement("td");
+            td.setAttribute("id", k.toString());
+            td.setAttribute("class", "nonClick");
 
-            if(tableau[i][j] == -2)
+
+            /*if(tableau[i][j] == -2)
             {
                 var image = document.createElement("img");
                 image.setAttribute("src", "Image/mine.png");
@@ -93,11 +97,12 @@ function CreerTableGraphique(tableau, donMode)
             else
             {
                 td.appendChild(document.createTextNode(tableau[i][j]))
-            }
+            }*/
 
             tr.appendChild(td);
 
             j++;
+            k++;
         }
         table.appendChild(tr);
         i++;

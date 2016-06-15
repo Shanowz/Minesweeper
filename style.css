@@ -27,9 +27,16 @@ td
     height: 50px;
     border: solid black 4px;
     text-align: center;
-    background-color: #aeadb0;
     font-size: 2em;
     /*font-weight: bold;*/
+}
+td.nonClick
+{
+    background-color: #aeadb0;
+}
+td.click
+{
+    background-color: #e9e8eb;
 }
 table#maTable
 {
