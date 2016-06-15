@@ -1,7 +1,10 @@
-function creePartie(mode) {
-    var donMode = new DonnesMode(mode);
+var donMode;
+var tableau;
 
-    var tableau = InitTableau(donMode.nbLin, donMode.nbCol);
+function creePartie(mode) {
+    donMode = new DonnesMode(mode);
+
+    tableau = InitTableau(donMode.nbLin, donMode.nbCol);
     PlacerBombes(tableau, donMode);
     PlacerChifffresBombes(tableau, donMode);
     CreerTableGraphique(tableau, donMode);
@@ -11,27 +14,33 @@ function creePartie(mode) {
 
 function gereClickCase(e)
 {
-    var i = Math.floor(e.target.id / donMode.nbCol);
-    var j = e.target.id % donMode.nbCol;
 
-    e.target.className = "click";
-    var td = e.target;
-    if(tableau[i][j] < 0)
+    if(e.target.className != "click")
     {
-        if(tableau[i][j] == -2)
+        var i = Math.floor(e.target.id / donMode.nbCol);
+        var j = e.target.id % donMode.nbCol;
+
+        e.target.className = "click";
+        var td = e.target;
+
+        if(tableau[i][j] < 0)
         {
-            var image = document.createElement("img");
-            image.setAttribute("src", "Image/mine.png");
-            image.setAttribute("alt", "bomb");
-            td.appendChild(image);
+            if(tableau[i][j] == -2)
+            {
+                var image = document.createElement("img");
+                image.setAttribute("src", "Image/mine.png");
+                image.setAttribute("alt", "bomb");
+                td.appendChild(image);
+            }
         }
-    }
-    else
-    {
-        td.appendChild(document.createTextNode(tableau[i][j]));
+        else
+        {
+            td.appendChild(document.createTextNode(tableau[i][j]));
+        }
+
+        console.log(i + " " + j);
     }
 
-    console.log(i + " " + j);
 
 }
 
