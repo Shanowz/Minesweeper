@@ -11,18 +11,19 @@ function init() {
         console.log("partie en "+$_GET("partie")+" mode");
         switch ( $_GET("partie")){
             case "Easy":
-                
+                creePartie(1);
                 break;
 
             case "Medium":
+                creePartie(2);
                 break;
 
             case "Warrior":
+                creePartie(3);
                 break;
 
             case "Custom":
                 break;
-
         }
 
         //création d'un bouton abandonner ===> peut être mieux de faire ça dans la création de la partie

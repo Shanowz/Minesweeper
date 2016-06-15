@@ -3,6 +3,8 @@ body{
     margin: 0;
     box-shadow: 0px 0px 7px 2px #656565;
     border-radius: 10px 10px 0 0;
+    background-image: url("explosion.jpg");
+    background-position: -800px 0px;
 }
 header{
     margin-top: 10px;
@@ -20,7 +22,6 @@ h1{
 
 main{
     min-height: 800px;
-<<<<<<< HEAD
 }
 td
 {
@@ -45,8 +46,7 @@ table#maTable
     /*width: 700px;*/
     height: 700px;
     margin: 20px auto;
-    background-image: url("explosion.jpg");
-    background-position: -800px 0px;
+
 }
 
 #popup{

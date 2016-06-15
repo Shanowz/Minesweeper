@@ -1,13 +1,13 @@
-var mode = 1;
+function creePartie(mode) {
+    var donMode = new DonnesMode(mode);
 
-var donMode = new DonnesMode(mode);
+    var tableau = InitTableau(donMode.nbLin, donMode.nbCol);
+    PlacerBombes(tableau, donMode);
+    PlacerChifffresBombes(tableau, donMode);
+    CreerTableGraphique(tableau, donMode);
 
-var tableau = InitTableau(donMode.nbLin, donMode.nbCol);
-PlacerBombes(tableau, donMode);
-PlacerChifffresBombes(tableau, donMode);
-CreerTableGraphique(tableau, donMode);
-
-var table = document.getElementById("maTable").addEventListener("click", gereClickCase);
+    var table = document.getElementById("maTable").addEventListener("click", gereClickCase);
+}
 
 function gereClickCase(e)
 {
