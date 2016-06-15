@@ -28,6 +28,8 @@ td
     border: solid black 4px;
     text-align: center;
     background-color: #aeadb0;
+    font-size: 2em;
+    /*font-weight: bold;*/
 }
 table#maTable
 {
