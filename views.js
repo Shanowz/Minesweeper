@@ -1,1 +1,1 @@
-console.log("test: "+test);
+console.log("test bidou bidou wa ! "+test);
