@@ -23,15 +23,16 @@ main{
 }
 td
 {
-    /*width: 50px;
-    height: 50px;*/
+    width: 85px;
+    height: 50px;
     border: solid black 4px;
     text-align: center;
+    background-color: #aeadb0;
 }
 table#maTable
 {
     border-collapse: collapse;
-    width: 700px;
+    /*width: 700px;*/
     height: 700px;
     margin: 20px auto;
 }

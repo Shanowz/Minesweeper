@@ -4,6 +4,7 @@ var donMode = new DonnesMode(mode);
 
 var tableau = InitTableau(donMode.nbLin, donMode.nbCol);
 PlacerBombes(tableau, donMode);
+PlacerChifffresBombes(tableau, donMode);
 CreerTableGraphique(tableau, donMode);
 
 /*var i= 0, j=0;
