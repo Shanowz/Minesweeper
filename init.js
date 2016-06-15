@@ -11,6 +11,7 @@ function init() {
         console.log("partie en "+$_GET("partie")+" mode");
         switch ( $_GET("partie")){
             case "Easy":
+                
                 break;
 
             case "Medium":

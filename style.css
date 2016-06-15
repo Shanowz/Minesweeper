@@ -20,6 +20,31 @@ h1{
 
 main{
     min-height: 800px;
+<<<<<<< HEAD
+}
+td
+{
+    width: 85px;
+    height: 50px;
+    border: solid black 4px;
+    text-align: center;
+    font-size: 2em;
+    /*font-weight: bold;*/
+}
+td.nonClick
+{
+    background-color: #aeadb0;
+}
+td.click
+{
+    background-color: #e9e8eb;
+}
+table#maTable
+{
+    border-collapse: collapse;
+    /*width: 700px;*/
+    height: 700px;
+    margin: 20px auto;
     background-image: url("explosion.jpg");
     background-position: -800px 0px;
 }
