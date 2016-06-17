@@ -32,11 +32,7 @@ function init() {
         bouton.href = "main.html";
         bouton.textAlign = "center";
         document.body.appendChild(bouton);
-
     }
-
-
-
 }
 
 function fenetre_accueil(){
@@ -53,45 +49,33 @@ function fenetre_accueil(){
     fen.appendChild(titre_popup);
 
     //ajout d'un form dans la popup pour selectionner le mode de jeux
-    var formu = selection_parties();
-    fen.appendChild(formu);
+    var menu = selection_parties();
+    fen.appendChild(menu);
 
 }
 
 function selection_parties(){
-    var form = document.createElement("form");
-    form.action = "";
     var choix_possibles = ["Easy", "Medium", "Warrior", "Custom"];
+    var menu_parties = document.createElement("section");
 
     for(var i=0, item; item=choix_possibles[i]; i++){
-        var label = document.createElement("label");
-        form.appendChild(label);
-        label.setAttribute("for", item);
-        label.innerHTML = item + " mode ";
+        var a = document.createElement('a');
+        a.className = "abouton";
+        a.href = "?partie="+item;
 
-        var select = document.createElement("input");
-        form.appendChild(select);
-        select.type = "radio";
-        select.name = "partie";
-        select.value = item;
-        select.checked="";
+        var bouton = document.createElement("div");
+        bouton.className = "boutonDiv";
+        bouton.innerHTML = item;
 
         var br = document.createElement("br");
-        form.appendChild(br);
+        a.appendChild(bouton);
+        menu_parties.appendChild(a);
+        menu_parties.appendChild(br);
     }
 
-    //bouton submit
-    var submit = document.createElement("input");
-    submit.type = "submit";
-    submit.value = "OK!";
-    form.appendChild(submit);
-
-    return form;
+    return menu_parties;
 }
 
-function cree_partie(){
-    console.log("partie créée");
-}
 
 //fonction en js pour recuperer un get comme dans php
 function $_GET(param) {
