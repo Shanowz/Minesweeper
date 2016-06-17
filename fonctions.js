@@ -3,11 +3,11 @@ function DonnesMode(mode)
 {
     switch(mode)
     {
-        case 1: this.nbBombes = 10;
+        case 1: this.nbBombes = 2;
                 this.nbCol = 8;
                 this.nbLin = 8;
             break;
-        case 2: this.nbBombes = 40;
+        case 2: this.nbBombes = 3;
                 this.nbCol = 16;
                 this.nbLin = 16;
             break;
@@ -108,20 +108,6 @@ function CreerTableGraphique(tableau, donMode)
             var td = document.createElement("td");
             td.setAttribute("id", k.toString());
             td.setAttribute("class", "nonClick");
-
-
-            /*if(tableau[i][j] == -2)
-            {
-                var image = document.createElement("img");
-                image.setAttribute("src", "Image/mine.png");
-                image.setAttribute("alt", "bomb");
-                td.appendChild(image);
-            }
-            else
-            {
-                td.appendChild(document.createTextNode(tableau[i][j]))
-            }*/
-
             tr.appendChild(td);
 
             j++;
@@ -130,6 +116,9 @@ function CreerTableGraphique(tableau, donMode)
         table.appendChild(tr);
         i++;
     }
+
+    var nbBombes = document.getElementById("nbBombes");
+    nbBombes.appendChild(document.createTextNode(donMode.nbBombes.toString()));
 }
 
 function PlacerChifffresBombes(tableau, donMode)
@@ -239,18 +228,39 @@ function DecouvrirCase(i, j, donMode, tableau, tableauBoolDecouvert)
         actuTD.appendChild(document.createTextNode(tableau[i][j]));
     }
 
+    caseNonDecouverte--;
+    if(caseNonDecouverte == donMode.nbBombes)
+        win = true;
 }
 
 function gereClickDroiteCase(e)
 {
-    var i = Math.floor(e.target.id / donMode.nbCol);
-    var j = e.target.id % donMode.nbCol;
+    var baliseNbBombes = document.getElementById("nbBombes");
+    var nbBombes = parseInt(baliseNbBombes.textContent);
+    baliseNbBombes.removeChild(baliseNbBombes.firstChild);
 
-    var image = document.createElement("img");
-    image.setAttribute("src", "Image/flag.gif");
-    image.setAttribute("alt", "");
+    if(e.target.nodeName == "IMG")
+    {
+        nbBombes ++;
+        e.target.parentNode.removeChild(e.target);
+        baliseNbBombes.appendChild(document.createTextNode(nbBombes.toString()));
+    }
+    else if(!e.target.firstChild)
+    {
+        nbBombes --;
+        var image = document.createElement("img");
+        image.setAttribute("src", "Image/flag.gif");
+        image.setAttribute("alt", "");
 
-    e.target.appendChild(image);
+        e.target.appendChild(image);
+        baliseNbBombes.appendChild(document.createTextNode(nbBombes.toString()));
+    }
+    else
+    {
+        nbBombes ++;
+        e.target.removeChild(e.target.firstChild);
+        baliseNbBombes.appendChild(document.createTextNode(nbBombes.toString()));
+    }
 }
 
 function gereClickGaucheCase(e)
@@ -263,6 +273,7 @@ function gereClickGaucheCase(e)
 
         if(tableau[i][j] == -2)
         {
+            lose = true;
             var listTD = document.querySelectorAll("td");
 
             i=0;
@@ -330,9 +341,11 @@ function Degagement(i, j, tableau, donMode, tableauBoolDecouvert)
         {
             if(k != i || l != j)
             {
-                DecouvrirCase(k, l, donMode, tableau, tableauBoolDecouvert);
-                if(tableau[k][l] == 0 && tableauBoolDecouvert[i][j] === false)
+                /*DecouvrirCase(k, l, donMode, tableau, tableauBoolDecouvert);*/
+                if(tableau[k][l] == 0 && tableauBoolDecouvert[k][l] === false)
                     Degagement(k, l, tableau, donMode, tableauBoolDecouvert);
+                else if(tableau[k][l] > 0)
+                    DecouvrirCase(k, l, donMode, tableau, tableauBoolDecouvert);
             }
             l++;
         }
