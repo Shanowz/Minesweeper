@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Démineur</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 </head>
 
@@ -11,10 +12,10 @@
     <header>
         <h1>SteDémineur</h1>
         <span id="casesRest">Cases restantes: </span><br>
-        <span id="bombesRest">Bombes restantes: </span>
+        <span id="bombesRest">Bombes restantes: <span id="nbBombes"></span></span>
     </header>
     <main>
-        <table id="maTable">
+        <table id="maTable" oncontextmenu="return false;">
         </table>
     </main>
 

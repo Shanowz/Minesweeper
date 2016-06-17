@@ -1,58 +1,51 @@
+
+
 var donMode;
 var tableau;
+var tableauBoolDecouvert;
+var win = false;
+var lose = false;
+var caseNonDecouverte;
 
 function creePartie(mode) {
     donMode = new DonnesMode(mode);
+    caseNonDecouverte = donMode.nbLin * donMode.nbCol;
 
     tableau = InitTableau(donMode.nbLin, donMode.nbCol);
+    tableauBoolDecouvert = InitTableauBool(donMode.nbLin, donMode.nbCol);
+
     PlacerBombes(tableau, donMode);
     PlacerChifffresBombes(tableau, donMode);
     CreerTableGraphique(tableau, donMode);
 
-    var table = document.getElementById("maTable").addEventListener("click", gereClickCase);
+    /*var table = document.getElementById("maTable").addEventListener("mousedown", gereClickGaucheCase);
+    var table = document.getElementById("maTable").addEventListener("contextmenu", gereClickDroiteCase);*/
 }
 
-function gereClickCase(e)
-{
+$(function () {
 
-    if(e.target.className != "click")
-    {
-        var i = Math.floor(e.target.id / donMode.nbCol);
-        var j = e.target.id % donMode.nbCol;
+    $('#maTable').mousedown(gereClick);
 
-        e.target.className = "click";
-        var td = e.target;
-
-        if(tableau[i][j] < 0)
-        {
-            if(tableau[i][j] == -2)
-            {
-                var image = document.createElement("img");
-                image.setAttribute("src", "Image/mine.png");
-                image.setAttribute("alt", "bomb");
-                td.appendChild(image);
-            }
+    function gereClick(e) {
+        if (e.which === 1) {
+            gereClickGaucheCase(e);
         }
-        else
-        {
-            td.appendChild(document.createTextNode(tableau[i][j]));
+        else {
+            gereClickDroiteCase(e);
         }
 
-        console.log(i + " " + j);
+        console.log(caseNonDecouverte);
+
+        if(lose)
+        {
+            console.log("you lose");
+        }
+        /*else if(win)
+        {
+            console.log("you win");
+        }*/
     }
 
+});
 
-}
-
-/*var i= 0, j=0;
-while(i < donMode.nbLin)
-{
-    j=0;
-    while(j < donMode.nbCol)
-    {
-        console.log("Valeur "+ i + " " + j + " : " + tableau[i][j]);
-        j++;
-    }
-    i++;
-}*/
 
