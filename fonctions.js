@@ -17,24 +17,20 @@ function DonnesMode(mode)
     }
 }
 
-function InitTableau(nbLin, nbCol, tableauBoolDecouvert)
+function InitTableau(nbLin, nbCol)
 {
     var i, j;
     var tableau = [];
-    tableauBoolDecouvert = [];
 
     i=0;
     while(i<nbLin)
     {
         tableau[i] = [];
-        tableauBoolDecouvert[i] = [];
 
         j=0;
         while(j<nbCol)
         {
             tableau[i][j] = -1;
-            tableauBoolDecouvert[i][j] = false;
-
             j++;
         }
 
@@ -42,6 +38,29 @@ function InitTableau(nbLin, nbCol, tableauBoolDecouvert)
     }
 
     return tableau;
+}
+
+function InitTableauBool(nbLin, nbCol)
+{
+    var i, j;
+    tableauBoolDecouvert = [];
+
+    i=0;
+    while(i<nbLin)
+    {
+        tableauBoolDecouvert[i] = [];
+
+        j=0;
+        while(j<nbCol)
+        {
+            tableauBoolDecouvert[i][j] = false;
+            j++;
+        }
+
+        i++;
+    }
+
+    return tableauBoolDecouvert;
 }
 
 function PlacerBombes(tableau, donMode)
@@ -197,10 +216,11 @@ function CompteBombesAutour(tableau, i, j, donMode)
     return compteur;
 }
 
-function DecouvrirCase(i, j, donMode, tableau)
+function DecouvrirCase(i, j, donMode, tableau, tableauBoolDecouvert)
 {
     console.log("decouvrir case");
     var actuTD = document.getElementById((i*donMode.nbCol+j).toString());
+    tableauBoolDecouvert[i][j] = true;
 
     if(actuTD.firstChild)
         actuTD.removeChild(actuTD.firstChild);
@@ -250,7 +270,7 @@ function gereClickGaucheCase(e)
             {
                 if(listTD[i].className == "nonClick")
                 {
-                    DecouvrirCase(Math.floor(i/donMode.nbCol), i%donMode.nbCol, donMode, tableau);
+                    DecouvrirCase(Math.floor(i/donMode.nbCol), i%donMode.nbCol, donMode, tableau, tableauBoolDecouvert);
                 }
                 i++;
             }
@@ -258,19 +278,19 @@ function gereClickGaucheCase(e)
         else
         {
             if(tableau[i][j] > 0)
-                DecouvrirCase(i, j, donMode, tableau);
+                DecouvrirCase(i, j, donMode, tableau, tableauBoolDecouvert);
             else
-                Degagement(i, j, tableau, donMode);
+                Degagement(i, j, tableau, donMode, tableauBoolDecouvert);
         }
     }
 }
 
-function Degagement(i, j, tableau, donMode)
+function Degagement(i, j, tableau, donMode, tableauBoolDecouvert)
 {
     var k, l, condk, condl, templ, compteur=0;
     var listTD = document.querySelectorAll("td");
 
-    DecouvrirCase(i, j, donMode, tableau);
+    DecouvrirCase(i, j, donMode, tableau, tableauBoolDecouvert);
 
     if(i != 0 && i != (donMode.nbLin)-1)
     {
@@ -311,8 +331,8 @@ function Degagement(i, j, tableau, donMode)
             if(k != i || l != j)
             {
                 DecouvrirCase(k, l, donMode, tableau);
-                /*if(tableau[k][l] == 0 && listTD[k*donMode.nbBombes + l].className == "nonClick")
-                    Degagement(k, l, tableau, donMode);*/
+                if(tableau[k][l] == 0 && tableauBoolDecouvert[i][j] === false)
+                    Degagement(k, l, tableau, donMode, tableauBoolDecouvert);
             }
             l++;
         }
