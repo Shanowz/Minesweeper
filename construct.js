@@ -40,10 +40,10 @@ $(function () {
         {
             console.log("you lose");
         }
-        else if(win)
+        /*else if(win)
         {
             console.log("you win");
-        }
+        }*/
     }
 
 });
