@@ -193,8 +193,129 @@ function CompteBombesAutour(tableau, i, j, donMode)
     return compteur;
 }
 
+function DecouvrirCase(i, j, donMode, tableau)
+{
+    console.log("decouvrir case");
+    var actuTD = document.getElementById((i*donMode.nbCol+j).toString());
 
+    if(actuTD.firstChild)
+        actuTD.removeChild(actuTD.firstChild);
 
+    actuTD.className = "click";
+
+    if(tableau[i][j] == -2)
+    {
+        var image = document.createElement("img");
+        image.setAttribute("src", "Image/mine.png");
+        image.setAttribute("alt", "bomb");
+        actuTD.appendChild(image);
+    }
+    else if(tableau[i][j] > 0)
+    {
+        actuTD.appendChild(document.createTextNode(tableau[i][j]));
+    }
+
+}
+
+function gereClickDroiteCase(e)
+{
+    var i = Math.floor(e.target.id / donMode.nbCol);
+    var j = e.target.id % donMode.nbCol;
+
+    var image = document.createElement("img");
+    image.setAttribute("src", "Image/flag.gif");
+    image.setAttribute("alt", "");
+
+    e.target.appendChild(image);
+}
+
+function gereClickGaucheCase(e)
+{
+
+    if(e.target.className != "click" && !e.target.firstChild)
+    {
+        var i = Math.floor(e.target.id / donMode.nbCol);
+        var j = e.target.id % donMode.nbCol;
+
+        if(tableau[i][j] == -2)
+        {
+            var listTD = document.querySelectorAll("td");
+
+            i=0;
+            while(i < listTD.length)
+            {
+                if(listTD[i].className == "nonClick")
+                {
+                    DecouvrirCase(Math.floor(i/donMode.nbCol), i%donMode.nbCol, donMode, tableau);
+                }
+                i++;
+            }
+        }
+        else
+        {
+            if(tableau[i][j] > 0)
+                DecouvrirCase(i, j, donMode, tableau);
+            else
+                Degagement(i, j, tableau, donMode);
+        }
+    }
+}
+
+function Degagement(i, j, tableau, donMode)
+{
+    var k, l, condk, condl, templ, compteur=0;
+    var listTD = document.querySelectorAll("td");
+
+    DecouvrirCase(i, j, donMode, tableau);
+
+    if(i != 0 && i != (donMode.nbLin)-1)
+    {
+        k=i-1;
+        condk=k+3;
+    }
+    else
+    {
+        if(i==0)
+            k=i;
+        else                //condition qui vont déterminer le nombre de fois ou on va boucler
+            k=i-1;          //pour trouver le nombre de bombes autour de ma case.
+                            //Je pars du principe que si la case ne se trouve pas sur les extremes(haut, bas, gauche ou droite),
+        condk=k+2;          //on va boucler 9 fois. Dans le cas contraire on bouclera 6 ou 4 fois selon la position.
+    }
+
+    if(j != 0 && j != (donMode.nbCol)-1)
+    {
+        l=j-1;
+        condl=l+3;
+    }
+    else
+    {
+        if(j==0)
+            l=j;
+        else
+            l=j-1;
+
+        condl=l+2;
+    }
+
+    templ=l;
+    while(k<condk)
+    {
+        l=templ;
+        while(l<condl)
+        {
+            if(k != i || l != j)
+            {
+                DecouvrirCase(k, l, donMode, tableau);
+                /*if(tableau[k][l] == 0 && listTD[k*donMode.nbBombes + l].className == "nonClick")
+                    Degagement(k, l, tableau, donMode);*/
+            }
+            l++;
+        }
+        k++;
+    }
+
+}
 
 
 
