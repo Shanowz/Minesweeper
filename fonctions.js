@@ -330,7 +330,7 @@ function Degagement(i, j, tableau, donMode, tableauBoolDecouvert)
         {
             if(k != i || l != j)
             {
-                DecouvrirCase(k, l, donMode, tableau);
+                DecouvrirCase(k, l, donMode, tableau, tableauBoolDecouvert);
                 if(tableau[k][l] == 0 && tableauBoolDecouvert[i][j] === false)
                     Degagement(k, l, tableau, donMode, tableauBoolDecouvert);
             }
