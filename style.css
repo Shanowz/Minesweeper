@@ -3,8 +3,6 @@ body{
     margin: 0;
     box-shadow: 0px 0px 7px 2px #656565;
     border-radius: 10px 10px 0 0;
-    background-image: url("explosion.jpg");
-    background-position: -800px 0px;
 }
 header{
     margin-top: 10px;
@@ -22,6 +20,8 @@ h1{
 
 main{
     min-height: 800px;
+    background-image: url("explosion.jpg");
+    background-position: 80% 0px;
 }
 td
 {
@@ -57,8 +57,24 @@ table#maTable
     border: 1px black solid;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.4);
+    text-align: center;
 }
 
 #titre_popup{
     text-align: center;
+}
+
+.abouton{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boutonDiv{
+    background-color: lightslategrey;
+    padding: 4px;
+    border-radius: 5px;
+    margin-bottom: 2px;
 }
