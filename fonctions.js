@@ -3,7 +3,7 @@ function DonnesMode(mode)
 {
     switch(mode)
     {
-        case 1: this.nbBombes = 2;
+        case 1: this.nbBombes = 10;
                 this.nbCol = 8;
                 this.nbLin = 8;
             break;
