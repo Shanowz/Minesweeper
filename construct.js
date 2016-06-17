@@ -2,11 +2,12 @@
 
 var donMode;
 var tableau;
+var tableauBoolDecouvert;
 
 function creePartie(mode) {
     donMode = new DonnesMode(mode);
 
-    tableau = InitTableau(donMode.nbLin, donMode.nbCol);
+    tableau = InitTableau(donMode.nbLin, donMode.nbCol, tableauBoolDecouvert);
     PlacerBombes(tableau, donMode);
     PlacerChifffresBombes(tableau, donMode);
     CreerTableGraphique(tableau, donMode);

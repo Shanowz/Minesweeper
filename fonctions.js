@@ -17,20 +17,24 @@ function DonnesMode(mode)
     }
 }
 
-function InitTableau(nbLin, nbCol)
+function InitTableau(nbLin, nbCol, tableauBoolDecouvert)
 {
     var i, j;
     var tableau = [];
+    tableauBoolDecouvert = [];
 
     i=0;
     while(i<nbLin)
     {
         tableau[i] = [];
+        tableauBoolDecouvert[i] = [];
 
         j=0;
         while(j<nbCol)
         {
             tableau[i][j] = -1;
+            tableauBoolDecouvert[i][j] = false;
+
             j++;
         }
 
